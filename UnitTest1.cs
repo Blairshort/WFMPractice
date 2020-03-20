@@ -32,17 +32,23 @@ namespace WFMPractice
         
             WFMMainPage WFMMainPageObj = new WFMMainPage(driver);
             WFMMainPageObj.DoMenuHover(WFMMainPageObj.NavMenuSelectors[MenuCode]);
-            Assert.Pass();
+            // Assert.Pass();
         }
 
         [Test]
-        public void ContactUs()
+        public void TestWeeklySalesClick()
         {
-            WFMUtils.LoadWebPage(this.driver, "https://www.us.sogeti.com");
+            WFMUtils.LoadWebPage(this.driver, "https://www.wholefoodsmarket.com/");
 
-            WFMMainPage SogetiUSAMainPageObj = new WFMMainPage(driver);
-            SogetiUSAMainPageObj.DoMenuHoverThenClickMenuLink(SogetiUSAMainPageObj.NavMenuSelectors["Contact"], "Contact us");
-        
+            WFMMainPage WFMMainPageObj = new WFMMainPage(driver);
+            WFMMainPageObj.DoMenuHoverThenClickMenuLink(WFMMainPageObj.NavMenuSelectors["WeeklySales"], "Weekly Sales");
+            // Assert.Pass();
+            WeeklySalesPage WeeklySalesPageObj = new WeeklySalesPage(driver);
+            WeeklySalesPageObj.ConfirmWeeklySalesPageTitle(WeeklySalesPageObj.NavMenuSelectors["WeeklySales"], "Weekly Sales");
+
+            Thread.Sleep(2000); 
+        }
+
         [OneTimeTearDown]
         public void Close()
         {

@@ -15,15 +15,6 @@ namespace WFMPractice
 {
     public class WFMMainPage
     {
-        // IWebDriver driver;      
-        //     public By WeeklySalesMenuButton = By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='Weekly Sales']");
-        //     By TipsAndIdeasMenuButton = By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='Tips & Ideas']");
-        //     By StoreLocatorMenuButton = By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='Store Locator']");
-        //     By BrowseProductsMenuButton = By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='Browse Products']");
-        //     By COVID19UpdateMenuButton = By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='COVID-19 Update']");
-
-        //     public WFMMainPage(IWebDriver driver) {
-        //         this.driver = driver;
         IWebDriver driver;
         public Dictionary<string, By> NavMenuSelectors;
                    

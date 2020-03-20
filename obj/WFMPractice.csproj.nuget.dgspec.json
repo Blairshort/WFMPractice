@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\bshort\\Documents\\Projects\\WFMPractice\\WFMPractice.csproj": {}
+    "C:\\Users\\bshort\\Documents\\Projects\\WFMPractice\\WFMPractice.csproj": {}
   },
   "projects": {
-    "c:\\Users\\bshort\\Documents\\Projects\\WFMPractice\\WFMPractice.csproj": {
+    "C:\\Users\\bshort\\Documents\\Projects\\WFMPractice\\WFMPractice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\bshort\\Documents\\Projects\\WFMPractice\\WFMPractice.csproj",
+        "projectUniqueName": "C:\\Users\\bshort\\Documents\\Projects\\WFMPractice\\WFMPractice.csproj",
         "projectName": "WFMPractice",
-        "projectPath": "c:\\Users\\bshort\\Documents\\Projects\\WFMPractice\\WFMPractice.csproj",
+        "projectPath": "C:\\Users\\bshort\\Documents\\Projects\\WFMPractice\\WFMPractice.csproj",
         "packagesPath": "C:\\Users\\bshort\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\bshort\\Documents\\Projects\\WFMPractice\\obj\\",
+        "outputPath": "C:\\Users\\bshort\\Documents\\Projects\\WFMPractice\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\bshort\\AppData\\Roaming\\NuGet\\NuGet.Config",
