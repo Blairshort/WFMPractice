@@ -29,15 +29,19 @@ namespace WFMPractice
             this.NavMenuSelectors.Add("BrowseProducts", By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='Browse Products']"));
             this.NavMenuSelectors.Add("Covid19Update", By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='COVID-19 Update']"));
         }
-                public void DoMenuHover(By MenuSelector)
+                public void DoMenuHover(By MenuSelector, int HoverSleepTimeInMilliSecs=4000)
         {
             IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             IWebElement element = wait.Until(ExpectedConditions.ElementIsVisible(MenuSelector));
             Actions action = new Actions(driver);
             action.MoveToElement(element).Build().Perform();
 
+            if (HoverSleepTimeInMilliSecs > 0) { 
+            System.Threading.Thread.Sleep(HoverSleepTimeInMilliSecs);
+            }
         }
-                public void DoMenuHoverThenClickMenuLink(By MenuSelector, string LinkText, int HoverSleepTimeInMilliSecs=4000)
+        
+        public void DoMenuHoverThenClickMenuLink(By MenuSelector, string LinkText, int HoverSleepTimeInMilliSecs=4000)
         {
             IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             IWebElement element = wait.Until(ExpectedConditions.ElementIsVisible(MenuSelector));

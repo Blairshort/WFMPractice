@@ -13,17 +13,18 @@ using System.Threading.Tasks;
 
 namespace WFMPractice
 {
-    public class WeeklySalesPage
+    public class TipsPage
     {
         IWebDriver driver;
-        public WeeklySalesPage(IWebDriver driver)
+        public TipsPage(IWebDriver driver)
         {
-            IWebElement WeeklySalesTitle = driver.FindElement(By.ClassName("w-salesflyer-header__h1"));
-        }
-            public void ConfirmWeeklySalesPageTitle(string TitleText)
-        {
-            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            IWebElement element = wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText(TitleText)));
+        //     this.driver = driver;
+        //     IWebElement WeeklySalesTitle = driver.FindElement(By.ClassName("w-salesflyer-header__h1"));
+        // }
+        //     public void ConfirmWeeklySalesPageTitle(string ClassName)
+        // {
+        //     IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+        //     IWebElement element = wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("w-salesflyer-header__h1")));
         }
     }
 }
