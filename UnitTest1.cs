@@ -102,7 +102,9 @@ namespace WFMPractice
             BrowseProductsPage BrowseProductsPageObj = new BrowseProductsPage(driver);
             BrowseProductsPageObj.SetFindStoreSearchBoxText("FindStore", "78758");
             BrowseProductsPageObj.ClickStoreFromSearch("FindStoreSearchResult", "Domain — 11920 Domain Dr, Austin, TX 78758");
-            
+            Thread.Sleep(2000); 
+            Assert.AreEqual (BrowseProductsPageObj.PageElements["SavedStoreLocation"], "Domain");
+            // BrowseProductsPageObj.SetProductSearchBoxText("ProductSearchBox", "Apple");
             Thread.Sleep(2000); 
         }
 
