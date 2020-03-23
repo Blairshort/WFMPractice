@@ -22,7 +22,8 @@ namespace WFMPractice
             this.driver = driver;
             this.PageElements = new Dictionary<string, By>();
             this.PageElements.Add("FindStore", By.CssSelector("input[placeholder='Search by zip code or city (U.S. stores only)']"));
-            this.PageElements.Add("FindStoreSearchResult", By.XPath("//*[@class='StoreSelector-Option--mQyct disable-click-focus']"));
+            this.PageElements.Add("FindStoreSearchResult", By.XPath("//*[@id='app']/div/div/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]"));
+            // this.PageElements.Add("FindStoreSearchResult", By.XPath("//*[@class='StoreSelector-Option--mQyct disable-click-focus']"));
             // IWebElement ExploreProductsTitle = driver.FindElement(By.ClassName("Home-Title--6Oi2Q"));
             // IWebElement FindStoreSearchBox = driver.FindElement(By.ClassName("Input-InputField--KUzM1 disable-click-focus"));
             // IWebElement FindStoreSearchResult = driver.FindElement(By.XPath("//*[@class='StoreSelector-Option--mQyct disable-click-focus']"));
