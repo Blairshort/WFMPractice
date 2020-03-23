@@ -100,8 +100,9 @@ namespace WFMPractice
             WFMUtils.LoadWebPage(this.driver, "https://products.wholefoodsmarket.com/");
 
             BrowseProductsPage BrowseProductsPageObj = new BrowseProductsPage(driver);
-            BrowseProductsPageObj.SetFindStoreSearchBoxText("FindStore", "Kelly");
-
+            BrowseProductsPageObj.SetFindStoreSearchBoxText("FindStore", "78758");
+            BrowseProductsPageObj.ClickStoreFromSearch("FindStoreSearchResult", "Domain — 11920 Domain Dr, Austin, TX 78758");
+            
             Thread.Sleep(2000); 
         }
 

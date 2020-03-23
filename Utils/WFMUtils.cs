@@ -3,7 +3,6 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
-
 using System;
 
 namespace WFMPractice
@@ -37,6 +36,6 @@ namespace WFMPractice
             driver.Manage().Window.Maximize();
             _ = driver.Manage().Timeouts().ImplicitWait;
             return driver;
-        }    
+        }
     }
 }

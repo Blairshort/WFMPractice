@@ -34,10 +34,9 @@ namespace WFMPractice
         //     IWebElement element = wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText(LinkText)));
         // }
 
-        public void SetFindStoreSearchBoxText(string FieldCode, string FieldText, int SleepTimeInMilliSecs=0)
+        public void SetFindStoreSearchBoxText(string FieldCode, string FieldText, int SleepTimeInMilliSecs=4000)
         {
-            IWebElement FindStoreSearchBox = this.driver.FindElement(this.PageElements["ContactInfoIFrame"]);
-            this.driver.SwitchTo().Frame(FindStoreSearchBox);
+            IWebElement FindStoreSearchBox = this.driver.FindElement(this.PageElements["FindStore"]);
             
             IWait<IWebDriver> wait = new WebDriverWait(this.driver, TimeSpan.FromSeconds(10));
             IWebElement FieldElt = wait.Until(ExpectedConditions.ElementIsVisible(this.PageElements[FieldCode]));
@@ -49,6 +48,15 @@ namespace WFMPractice
             if (SleepTimeInMilliSecs > 0) {
                 Thread.Sleep(SleepTimeInMilliSecs);
             } 
+        }
+
+        public void ClickStoreFromSearch (string FieldCode, string FieldText, int SleepTimeInMilliSecs=4000)
+        {
+            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            IWebElement subelement = wait.Until(ExpectedConditions.ElementIsVisible(this.PageElements[FieldCode]));
+            Actions action = new Actions(driver);
+            action.MoveToElement(subelement);
+            action.Click().Build().Perform();
         }
     }
 }
