@@ -1,3 +1,5 @@
+using NUnit.Framework;
+
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
@@ -29,7 +31,7 @@ namespace WFMPractice
             this.NavMenuSelectors.Add("BrowseProducts", By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='Browse Products']"));
             this.NavMenuSelectors.Add("Covid19Update", By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='COVID-19 Update']"));
         }
-                public void DoMenuHover(By MenuSelector, int HoverSleepTimeInMilliSecs=4000)
+        public void DoMenuHover(By MenuSelector, int HoverSleepTimeInMilliSecs=4000)
         {
             IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             IWebElement element = wait.Until(ExpectedConditions.ElementIsVisible(MenuSelector));
@@ -56,6 +58,41 @@ namespace WFMPractice
             IWebElement subelement = wait2.Until(ExpectedConditions.ElementIsVisible(By.LinkText(LinkText)));
             action.MoveToElement(subelement);
             action.Click().Build().Perform();
+        }
+
+        public void ClickToWeeklySalesMenu(int MaxWaitTimeInSecs=10)
+        {
+            driver.FindElement(NavMenuSelectors["WeeklySales"]).Click();
+            WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
+            Assert.That(driver.Url, Does.StartWith("https://www.wholefoodsmarket.com/sales-flyer"));
+        }
+
+        public void ClickToTipsAndIdeasMenu(int MaxWaitTimeInSecs=10)
+        {
+            driver.FindElement(NavMenuSelectors["Tips&Ideas"]).Click();
+            WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
+            Assert.That(driver.Url, Does.StartWith("https://inspiration.wholefoodsmarket.com/"));
+        }
+
+        public void ClickToStoreLocatorMenu(int MaxWaitTimeInSecs=10)
+        {
+            driver.FindElement(NavMenuSelectors["StoreLocator"]).Click();
+            WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
+            Assert.That(driver.Url, Does.StartWith("https://www.wholefoodsmarket.com/stores"));
+        }
+
+        public void ClickToBrowseProductsMenu(int MaxWaitTimeInSecs=10)
+        {
+            driver.FindElement(NavMenuSelectors["BrowseProducts"]).Click();
+            WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
+            Assert.That(driver.Url, Does.StartWith("https://products.wholefoodsmarket.com/"));
+        }
+
+        public void ClickToCovid19UpdateMenu(int MaxWaitTimeInSecs=10)
+        {
+            driver.FindElement(NavMenuSelectors["Covid19Update"]).Click();
+            WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
+            Assert.That(driver.Url, Does.StartWith("https://www.wholefoodsmarket.com/company-info/covid-19-response"));
         }
     }
 }

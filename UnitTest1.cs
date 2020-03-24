@@ -13,12 +13,58 @@ namespace WFMPractice
     [TestFixture]
     public class Tests
     {
+        string WFMMainPageURL = "https://www.wholefoodsmarket.com/";
         IWebDriver driver;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void Setup()
         {
             this.driver = WFMUtils.InitDriver("Chrome", "C:\\Users\\bshort\\WebDriver");
+        }
+
+        [Test]
+        public void TestWFMMainPageBringup2()
+        {
+            WFMUtils.LoadWebPage(driver, WFMMainPageURL);
+            Assert.That(driver.Url, Is.EqualTo(WFMMainPageURL));
+
+            Thread.Sleep(2000); 
+        }
+
+        [TestCase("WeeklySales", "https://www.wholefoodsmarket.com/sales-flyer")]
+        [TestCase("Tips&Ideas", "https://inspiration.wholefoodsmarket.com/")]
+        [TestCase("StoreLocator", "https://www.wholefoodsmarket.com/stores")]
+        [TestCase("BrowseProducts", "https://products.wholefoodsmarket.com/")]
+        [TestCase("Covid19Update", "https://www.wholefoodsmarket.com/company-info/covid-19-response")]
+        public void TestWFMMainPageMenuLinks2(string MenuCode, string DestUrl)
+        {
+            WFMUtils.LoadWebPage(driver, WFMMainPageURL);
+            Assert.That(driver.Url, Is.EqualTo(WFMMainPageURL));
+
+            WFMMainPage WFMMainPageObj = new WFMMainPage(driver);
+
+            driver.FindElement(WFMMainPageObj.NavMenuSelectors[MenuCode]).Click();
+            WFMUtils.WaitForCurrPageToFinishLoading(driver);
+            Assert.That(driver.Url, Does.StartWith(DestUrl));
+
+            Thread.Sleep(2000); 
+        }
+
+        [Test]
+        public void TestBrowseProducts_FindStore2()
+        {
+            WFMUtils.LoadWebPage(driver, WFMMainPageURL);
+            Assert.That(driver.Url, Is.EqualTo(WFMMainPageURL));
+
+            WFMMainPage WFMMainPageObj = new WFMMainPage(driver);
+            WFMMainPageObj.ClickToBrowseProductsMenu();
+
+            BrowseProductsPage BrowseProductsPageObj = new BrowseProductsPage(driver);
+            BrowseProductsPageObj.SetFindStoreSearchBoxText("FindStore", "78758");
+            BrowseProductsPageObj.ClickStoreFromSearch("FindStoreSearchResult", "Domain — 11920 Domain Dr, Austin, TX 78758");
+            Assert.That(driver.FindElement(BrowseProductsPageObj.PageElements["SavedStoreLocation"]).GetAttribute("innerText"), Is.EqualTo("Domain"));
+
+            Thread.Sleep(2000); 
         }
 
         [TestCase("WeeklySales")]
@@ -106,9 +152,9 @@ namespace WFMPractice
             Assert.AreEqual (BrowseProductsPageObj.PageElements["SavedStoreLocation"], "Domain");
             // BrowseProductsPageObj.SetProductSearchBoxText("ProductSearchBox", "Apple");
             Thread.Sleep(2000); 
-        }
+        }        
 
-        [OneTimeTearDown]
+        [TearDown]
         public void Close()
         {
             driver.Close();

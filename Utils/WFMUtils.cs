@@ -55,6 +55,17 @@ namespace WFMPractice
         public static void LoadWebPage(IWebDriver driver, string Url, int TimeoutInSecs=10) 
         {
             driver.Url = Url;
+            WaitForCurrPageToFinishLoading(driver, TimeoutInSecs);
+            // new WebDriverWait(
+            //     driver, 
+            //     TimeSpan.FromSeconds(TimeoutInSecs)
+            // ).Until(
+            //     d => ((IJavaScriptExecutor) d).ExecuteScript("return document.readyState").Equals("complete")
+            // );
+        }
+
+        public static void WaitForCurrPageToFinishLoading(IWebDriver driver, int TimeoutInSecs=10) 
+        {
             new WebDriverWait(
                 driver, 
                 TimeSpan.FromSeconds(TimeoutInSecs)
