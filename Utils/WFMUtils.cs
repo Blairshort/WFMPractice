@@ -21,7 +21,7 @@ namespace WFMPractice
             public By BySelector;
             public Dictionary<string, string> AttrsDict;
             public string Name;
-            public SelDescriptor(string aName, By aBySelector, Dictionary<string, string> aAttrsDict)
+            public SelDescriptor(string aName, By aBySelector, Dictionary<string,string> aAttrsDict)
             {
                 Name = aName;
                 BySelector = aBySelector;
@@ -31,29 +31,46 @@ namespace WFMPractice
 
         public class SelsMgr
         {
-            Dictionary<string, SelDescriptor> SelsDict;
+            public Dictionary<string, SelDescriptor> SelsDict;
 
             public SelsMgr()
             {
                 SelsDict = new Dictionary<string, SelDescriptor>();
             }
-            public void AddSelDescriptor(SelDescriptor aSelDesc)
+            public void AddSelDescriptor(string aName, By aBySelector, Dictionary<string,string> aAttrsDict)
             {
-                SelsDict.Add(aSelDesc.Name, aSelDesc);
+                SelsDict.Add(aName, new SelDescriptor(aName, aBySelector, aAttrsDict));
+            }
+
+            public By GetBySelector(string aName)
+            {
+                return SelsDict[aName].BySelector;
             }
         } 
 
         public class POM
         {
-            public Dictionary<string, POM> POMTracker = new Dictionary<string, POM>();
+            public static Dictionary<string, POM> POMRegistry = new Dictionary<string, POM>();
+            public IWebDriver driver;
             public string Path;
-            public SelsMgr SelMgr;
+            public SelsMgr SelsMgr;
         
-            public POM(string aPath, SelsMgr aSelectorsMgr)
+            public POM(string aPath, IWebDriver aDriver)
             {
+                POMRegistry.Add(Path, this); // Add this POM to the registry
+
                 Path = aPath;
-                SelMgr = aSelectorsMgr;
-                POMTracker.Add(Path, this);
+                driver = aDriver;
+                SelsMgr = new SelsMgr();
+            }
+
+            public void AddSelDescriptor(string aName, By aBySelector, Dictionary<string,string> aAttrsDict)
+            {
+                this.SelsMgr.AddSelDescriptor(aName, aBySelector, aAttrsDict);
+            }
+            public By GetBySelector(string aName)
+            {
+                return SelsMgr.GetBySelector(aName);
             }
         }
 
