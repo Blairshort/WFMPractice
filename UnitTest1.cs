@@ -63,7 +63,7 @@ namespace WFMPractice
             BrowseProductsPageObj.SetFindStoreSearchBoxText("FindStore", "78758");
             BrowseProductsPageObj.ClickStoreFromSearch("FindStoreSearchResult", "Domain — 11920 Domain Dr, Austin, TX 78758");
             Assert.That(driver.FindElement(BrowseProductsPageObj.PageElements["SavedStoreLocation"]).GetAttribute("innerText"), Is.EqualTo("Domain"));
-
+            WFMUtils.ScreenshotToFilepath(driver, "jeffshot.png");
             Thread.Sleep(2000); 
         }
 

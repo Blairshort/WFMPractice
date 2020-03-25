@@ -1,10 +1,15 @@
+using NUnit.Framework;
+
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
+
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing.Imaging;
 
 
 namespace WFMPractice
@@ -108,6 +113,20 @@ namespace WFMPractice
            ).Until(
                ExpectedConditions.ElementIsVisible(BySelector)
            );
+        }
+
+        public static void ScreenshotToFilepath(IWebDriver driver, string Filepath)
+        {
+            try
+            {
+                Screenshot image = ((ITakesScreenshot) driver).GetScreenshot();
+                image.SaveAsFile(Filepath, ScreenshotImageFormat.Png);
+            }
+            catch (Exception e)
+            {
+               Debug.WriteLine(e);
+               Assert.Fail("Exception creating screenshot!\n" + e);
+            }
         }         
     }
 }
