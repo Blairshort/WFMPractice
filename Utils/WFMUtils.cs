@@ -36,6 +36,11 @@ namespace WFMPractice
                 }
                 return false;
             }
+
+            public string GetAttrVal(string aAttrName)
+            {
+                return AttrsDict[aAttrName];
+            }
         } 
 
         public class SelsMgr
@@ -56,18 +61,32 @@ namespace WFMPractice
                 return SelsDict[aName].BySelector;
             }
 
-            public List<By> GetEltsHavingAttrBySelectorsList(string aAttrName)
+            public List<By> GetBySelectorsList_EltsHavingAttrName(string aAttrName)
             {
-                List<By> StaticBySelectorsList = new List<By>();
+                List<By> BySelectorsList = new List<By>();
 
-                foreach(KeyValuePair<string, SelDescriptor> CurrSelDictEntry in SelsDict)
+                foreach(KeyValuePair<string, SelDescriptor> CurrSelKV in SelsDict)
                 {
-                    if (CurrSelDictEntry.Value.HasAttr(aAttrName))
+                    if (CurrSelKV.Value.HasAttr(aAttrName))
                     {
-                        StaticBySelectorsList.Add(CurrSelDictEntry.Value.BySelector);
+                        BySelectorsList.Add(CurrSelKV.Value.BySelector);
                     }
                 }
-                return StaticBySelectorsList;
+                return BySelectorsList;
+            }
+
+            public List<By> GetBySelectorsList_EltsHavingAttrNameVal(string aAttrName, string aAttrVal)
+            {
+                List<By> BySelectorsList = new List<By>();
+
+                foreach(KeyValuePair<string, SelDescriptor> CurrSelKV in SelsDict)
+                {
+                    if (CurrSelKV.Value.HasAttr(aAttrName) && CurrSelKV.Value.GetAttrVal(aAttrVal) == aAttrVal)
+                    {
+                        BySelectorsList.Add(CurrSelKV.Value.BySelector);
+                    }
+                }
+                return BySelectorsList;
             }
         } 
 
@@ -98,7 +117,7 @@ namespace WFMPractice
 
             public void WaitForAllStaticEltsToBeVisible(int aTimeoutInSecs=10)
             {
-                List<By> StaticEltsBySelectorsList = SelsMgr.GetEltsHavingAttrBySelectorsList("isStatic");
+                List<By> StaticEltsBySelectorsList = SelsMgr.GetBySelectorsList_EltsHavingAttrName("isStatic");
                 WaitForAllEltsToBeVisible(driver, StaticEltsBySelectorsList, aTimeoutInSecs);
             }            
 
@@ -112,6 +131,13 @@ namespace WFMPractice
                 );
 
                 WaitForAllStaticEltsToBeVisible(aTimeoutInSecs);
+            }
+
+            public IWebElement ClickEltByName(string aEltName)
+            {
+                IWebElement elt = driver.FindElement(SelsMgr.GetBySelector(aEltName));
+                elt.Click();
+                return elt;
             }
         }
 
@@ -191,6 +217,35 @@ namespace WFMPractice
                Debug.WriteLine(e);
                Assert.Fail("Exception creating screenshot!\n" + e);
             }
-        }         
+        } 
+
+        public void HoverOverElt(IWebDriver driver, By EltSelector, int HoverTimeInSecs=3, int TimeoutInSecs=10)
+        {
+            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            IWebElement element = wait.Until(ExpectedConditions.ElementIsVisible(EltSelector));
+            Actions action = new Actions(driver);
+            action.MoveToElement(element).Build().Perform();
+
+            if (HoverTimeInSecs > 0) { 
+                System.Threading.Thread.Sleep(TimeSpan.FromSeconds(HoverTimeInSecs));
+            }
+        }
+
+        public void HoverOverEltThenClickLinkText(IWebDriver driver, By EltSelector, string LinkText, int HoverTimeInSecs=3, int TimeoutInSecs=10)
+        {
+            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            IWebElement element = wait.Until(ExpectedConditions.ElementIsVisible(EltSelector));
+            Actions action = new Actions(driver);
+            action.MoveToElement(element).Build().Perform();
+
+            if (HoverTimeInSecs > 0) {
+                System.Threading.Thread.Sleep(TimeSpan.FromSeconds(HoverTimeInSecs));
+            }
+
+            IWait<IWebDriver> wait2 = new WebDriverWait(driver, TimeSpan.FromSeconds(TimeoutInSecs));
+            IWebElement subelement = wait2.Until(ExpectedConditions.ElementIsVisible(By.LinkText(LinkText)));
+            action.MoveToElement(subelement);
+            action.Click().Build().Perform();
+        }                        
     }
 }

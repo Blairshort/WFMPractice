@@ -60,11 +60,39 @@ namespace WFMPractice
             );
         }
 
+        public void ClickToWeeklySalesMenu(int MaxWaitTimeInSecs=10)
+        {
+            ClickEltByName("WeeklySales");
+            WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
+            Assert.That(driver.Url, Does.StartWith("https://www.wholefoodsmarket.com/sales-flyer"));
+        }
+
+        public void ClickToTipsAndIdeasMenu(int MaxWaitTimeInSecs=10)
+        {
+            ClickEltByName("Tips&Ideas");
+            WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
+            Assert.That(driver.Url, Does.StartWith("https://inspiration.wholefoodsmarket.com/"));
+        }
+
+        public void ClickToStoreLocatorMenu(int MaxWaitTimeInSecs=10)
+        {
+            ClickEltByName("StoreLocator");
+            WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
+            Assert.That(driver.Url, Does.StartWith("https://www.wholefoodsmarket.com/stores"));
+        }
+
         public void ClickToBrowseProductsMenu(int MaxWaitTimeInSecs=10)
         {
-            driver.FindElement(this.GetBySelector("BrowseProducts")).Click();
+            ClickEltByName("BrowseProducts");
             WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
             Assert.That(driver.Url, Does.StartWith("https://products.wholefoodsmarket.com/"));
+        }
+
+        public void ClickToCovid19UpdateMenu(int MaxWaitTimeInSecs=10)
+        {
+            ClickEltByName("Covid19Update");
+            WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
+            Assert.That(driver.Url, Does.StartWith("https://www.wholefoodsmarket.com/company-info/covid-19-response"));
         }
     }
 }
