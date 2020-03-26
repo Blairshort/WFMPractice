@@ -15,9 +15,9 @@ using System.Threading.Tasks;
 
 namespace WFMPractice
 {
-    public class JeffMainPage : WFMUtils.POM
+    public class PrescriptiveMainPage : WFMUtils.POM
     {
-        public JeffMainPage(IWebDriver aDriver) 
+        public PrescriptiveMainPage(IWebDriver aDriver) 
             : base(
                 "/main", 
                 aDriver

@@ -27,6 +27,15 @@ namespace WFMPractice
                 BySelector = aBySelector;
                 AttrsDict = aAttrsDict;
             }
+
+            public Boolean HasAttr(string aAttrName)
+            {
+                if (AttrsDict.ContainsKey(aAttrName))
+                {
+                    return true;
+                }
+                return false;
+            }
         } 
 
         public class SelsMgr
@@ -45,6 +54,20 @@ namespace WFMPractice
             public By GetBySelector(string aName)
             {
                 return SelsDict[aName].BySelector;
+            }
+
+            public List<By> GetEltsHavingAttrBySelectorsList(string aAttrName)
+            {
+                List<By> StaticBySelectorsList = new List<By>();
+
+                foreach(KeyValuePair<string, SelDescriptor> CurrSelDictEntry in SelsDict)
+                {
+                    if (CurrSelDictEntry.Value.HasAttr(aAttrName))
+                    {
+                        StaticBySelectorsList.Add(CurrSelDictEntry.Value.BySelector);
+                    }
+                }
+                return StaticBySelectorsList;
             }
         } 
 
@@ -72,18 +95,30 @@ namespace WFMPractice
             {
                 return SelsMgr.GetBySelector(aName);
             }
+
+            public void WaitForAllStaticEltsToBeVisible(int aTimeoutInSecs=10)
+            {
+                List<By> StaticEltsBySelectorsList = SelsMgr.GetEltsHavingAttrBySelectorsList("isStatic");
+                WaitForAllEltsToBeVisible(driver, StaticEltsBySelectorsList, aTimeoutInSecs);
+            }            
+
+            public void WaitForPageToFinishLoading(int aTimeoutInSecs=10) 
+            {
+                new WebDriverWait(
+                    driver, 
+                    TimeSpan.FromSeconds(aTimeoutInSecs)
+                ).Until(
+                    d => ((IJavaScriptExecutor) d).ExecuteScript("return document.readyState").Equals("complete")
+                );
+
+                WaitForAllStaticEltsToBeVisible(aTimeoutInSecs);
+            }
         }
 
         public static void LoadWebPage(IWebDriver driver, string Url, int TimeoutInSecs=10) 
         {
             driver.Url = Url;
             WaitForCurrPageToFinishLoading(driver, TimeoutInSecs);
-            // new WebDriverWait(
-            //     driver, 
-            //     TimeSpan.FromSeconds(TimeoutInSecs)
-            // ).Until(
-            //     d => ((IJavaScriptExecutor) d).ExecuteScript("return document.readyState").Equals("complete")
-            // );
         }
 
         public static void WaitForCurrPageToFinishLoading(IWebDriver driver, int TimeoutInSecs=10) 
@@ -121,7 +156,19 @@ namespace WFMPractice
            ).Until(
                ExpectedConditions.UrlToBe(url)
            );
-        }  
+        }
+
+        public static void WaitForAllEltsToBeVisible(IWebDriver driver, List<By> aBySelectorsList, int TimeoutInSecs=10) {
+            foreach (By CurrBySelector in aBySelectorsList) 
+            {
+                new WebDriverWait(
+                    driver,
+                    TimeSpan.FromSeconds(TimeoutInSecs)
+                ).Until(
+                    ExpectedConditions.ElementIsVisible(CurrBySelector)
+                );
+            }
+        }
 
         public static void WaitForEltToBeVisible(IWebDriver driver, By BySelector, int TimeoutInSecs=10) {
            new WebDriverWait(
