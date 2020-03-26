@@ -99,11 +99,11 @@ namespace WFMPractice
         
             public POM(string aPath, IWebDriver aDriver)
             {
-                POMRegistry.Add(Path, this); // Add this POM to the registry
-
                 Path = aPath;
                 driver = aDriver;
                 SelsMgr = new SelsMgr();
+
+                POMRegistry.Add(Path, this); // Add this POM to the registry
             }
 
             public void AddSelDescriptor(string aName, By aBySelector, Dictionary<string,string> aAttrsDict)

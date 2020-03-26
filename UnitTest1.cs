@@ -31,6 +31,28 @@ namespace WFMPractice
             Thread.Sleep(2000); 
         }
 
+        [Test]
+        public void TestPrescriptiveMainPage_ClickToOtherPages()
+        {
+            WFMUtils.LoadWebPage(driver, WFMMainPageURL);
+            Assert.That(driver.Url, Is.EqualTo(WFMMainPageURL));
+
+            PrescriptiveMainPage PrescriptiveMainPageObj = new PrescriptiveMainPage(driver);
+            // PrescriptiveMainPageObj.ClickToWeeklySalesPage();
+            // PrescriptiveMainPageObj.ClickToHomePage();
+            // PrescriptiveMainPageObj.ClickToTipsAndIdeasPage();
+            // PrescriptiveMainPageObj.ClickToHomePage();
+            // PrescriptiveMainPageObj.ClickToStoreLocatorPage();
+            // PrescriptiveMainPageObj.ClickToHomePage();
+            PrescriptiveMainPageObj.ClickToBrowseProductsPage();
+
+            PrescriptiveBrowseProductsPage PrescriptiveBrowseProductsPageObj = new PrescriptiveBrowseProductsPage(driver);
+            PrescriptiveBrowseProductsPageObj.ClickToHomePage();
+            // PrescriptiveMainPageObj.ClickToCovid19UpdatePage();
+            // PrescriptiveMainPageObj.ClickToHomePage();
+            Thread.Sleep(2000); 
+        }
+
         [TestCase("WeeklySales", "https://www.wholefoodsmarket.com/sales-flyer")]
         [TestCase("Tips&Ideas", "https://inspiration.wholefoodsmarket.com/")]
         [TestCase("StoreLocator", "https://www.wholefoodsmarket.com/stores")]

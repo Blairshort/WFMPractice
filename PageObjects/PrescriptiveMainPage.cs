@@ -19,10 +19,17 @@ namespace WFMPractice
     {
         public PrescriptiveMainPage(IWebDriver aDriver) 
             : base(
-                "/main", 
+                "/Main", 
                 aDriver
             )
         {
+            this.AddSelDescriptor(
+                "HomeLogoLink", 
+                By.CssSelector(".logo__link"),
+                new Dictionary<string,string>{
+                    {"isStatic", "y"}
+                }
+            );
             this.AddSelDescriptor(
                 "WeeklySales", 
                 By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='Weekly Sales']"),
@@ -60,35 +67,43 @@ namespace WFMPractice
             );
         }
 
-        public void ClickToWeeklySalesMenu(int MaxWaitTimeInSecs=10)
+        public void ClickToHomePage(int MaxWaitTimeInSecs=10)
+        {
+            ClickEltByName("HomeLogoLink");
+            WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
+            Assert.That(driver.Url, Does.StartWith("https://www.wholefoodsmarket.com/"));
+        }
+
+
+        public void ClickToWeeklySalesPage(int MaxWaitTimeInSecs=10)
         {
             ClickEltByName("WeeklySales");
             WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
             Assert.That(driver.Url, Does.StartWith("https://www.wholefoodsmarket.com/sales-flyer"));
         }
 
-        public void ClickToTipsAndIdeasMenu(int MaxWaitTimeInSecs=10)
+        public void ClickToTipsAndIdeasPage(int MaxWaitTimeInSecs=10)
         {
             ClickEltByName("Tips&Ideas");
             WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
             Assert.That(driver.Url, Does.StartWith("https://inspiration.wholefoodsmarket.com/"));
         }
 
-        public void ClickToStoreLocatorMenu(int MaxWaitTimeInSecs=10)
+        public void ClickToStoreLocatorPage(int MaxWaitTimeInSecs=10)
         {
             ClickEltByName("StoreLocator");
             WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
             Assert.That(driver.Url, Does.StartWith("https://www.wholefoodsmarket.com/stores"));
         }
 
-        public void ClickToBrowseProductsMenu(int MaxWaitTimeInSecs=10)
+        public void ClickToBrowseProductsPage(int MaxWaitTimeInSecs=10)
         {
             ClickEltByName("BrowseProducts");
             WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
             Assert.That(driver.Url, Does.StartWith("https://products.wholefoodsmarket.com/"));
         }
 
-        public void ClickToCovid19UpdateMenu(int MaxWaitTimeInSecs=10)
+        public void ClickToCovid19UpdatePage(int MaxWaitTimeInSecs=10)
         {
             ClickEltByName("Covid19Update");
             WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
