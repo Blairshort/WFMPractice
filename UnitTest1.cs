@@ -19,7 +19,7 @@ namespace WFMPractice
         [SetUp]
         public void Setup()
         {
-            this.driver = WFMUtils.InitDriver("Chrome", "C:\\Users\\jefisher\\Documents\\WebDriver"); //"C:\\Users\\bshort\\WebDriver");
+            this.driver = WFMUtils.InitDriver("Chrome", "C:\\Users\\bshort\\WebDriver");
         }
 
         [Test]
