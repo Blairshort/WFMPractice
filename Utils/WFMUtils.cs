@@ -21,6 +21,12 @@ namespace WFMPractice
             public By BySelector;
             public Dictionary<string, string> AttrsDict;
             public string Name;
+            public class StdAttrNames 
+            { 
+                public static string IsStatic            = "isStatic";
+                public static string ClickCausesPageLoad = "clickCausesPageLoad";
+            }
+
             public SelDescriptor(string aName, By aBySelector, Dictionary<string,string> aAttrsDict)
             {
                 Name = aName;
@@ -123,7 +129,7 @@ namespace WFMPractice
 
             public void WaitForAllStaticEltsToBeVisible(int aTimeoutInSecs=10)
             {
-                List<By> StaticEltsBySelectorsList = SelsMgr.GetBySelectorsList_EltsHavingAttrName("isStatic");
+                List<By> StaticEltsBySelectorsList = SelsMgr.GetBySelectorsList_EltsHavingAttrName(SelDescriptor.StdAttrNames.IsStatic);
                 WaitForAllEltsToBeVisible(driver, StaticEltsBySelectorsList, aTimeoutInSecs);
             }            
 
@@ -144,7 +150,7 @@ namespace WFMPractice
                 SelDescriptor CurrSelDescriptor = SelsMgr.GetSelDescriptor(aEltName);
                 IWebElement elt = driver.FindElement(CurrSelDescriptor.BySelector);
                 elt.Click();
-                if (CurrSelDescriptor.HasAttr("ClickCausesPageLoad"))
+                if (CurrSelDescriptor.HasAttr(SelDescriptor.StdAttrNames.ClickCausesPageLoad))
                 {
                     WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
                     return null;
