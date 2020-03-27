@@ -72,6 +72,14 @@ namespace WFMPractice
                 }
             );
             this.AddSelDescriptor(
+                "Button_FindYourStore", 
+                By.XPath("//a[text()='Find your store']"),
+                new Dictionary<string,string>{
+                    {"isStatic", "y"},
+                    {"clickCausesPageLoad", "y"}
+                }
+            );
+            this.AddSelDescriptor(
                 "Menu_BrowseProducts", 
                 By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='Browse Products']"),
                 new Dictionary<string,string>{
@@ -144,6 +152,13 @@ namespace WFMPractice
         public void ClickButton_FindAStore(int MaxWaitTimeInSecs=10)
         {
             ClickEltByName("Button_FindAStore");
+            // WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
+            Assert.That(driver.Url, Does.StartWith("https://www.wholefoodsmarket.com/stores"));
+        }
+
+        public void ClickButton_FindYourStore(int MaxWaitTimeInSecs=10)
+        {
+            ClickEltByName("Button_FindYourStore");
             // WFMUtils.WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
             Assert.That(driver.Url, Does.StartWith("https://www.wholefoodsmarket.com/stores"));
         }
