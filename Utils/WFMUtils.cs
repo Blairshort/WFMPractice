@@ -52,7 +52,7 @@ namespace WFMPractice
             }
         }
 
-        public static void LoadWebPage(IWebDriver driver, string Url, int TimeoutInSecs=10) 
+        public static void LoadWebPage(IWebDriver driver, string Url, int TimeoutInSecs=20) 
         {
             driver.Url = Url;
             new WebDriverWait(
@@ -81,7 +81,7 @@ namespace WFMPractice
             return driver;
         }
 
-        public static void WaitForUrl(IWebDriver driver, String url, int TimeoutInSecs=10) {
+        public static void WaitForUrl(IWebDriver driver, String url, int TimeoutInSecs=20) {
            new WebDriverWait(
                driver,
                TimeSpan.FromSeconds(TimeoutInSecs)
@@ -90,7 +90,7 @@ namespace WFMPractice
            );
         }  
 
-        public static void WaitForEltToBeVisible(IWebDriver driver, By BySelector, int TimeoutInSecs=10) {
+        public static void WaitForEltToBeVisible(IWebDriver driver, By BySelector, int TimeoutInSecs=20) {
            new WebDriverWait(
                driver,
                TimeSpan.FromSeconds(TimeoutInSecs)
