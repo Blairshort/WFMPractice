@@ -38,17 +38,17 @@ namespace WFMPractice
             Assert.That(driver.Url, Is.EqualTo(WFMMainPageURL));
 
             PrescriptiveMainPage PrescriptiveMainPageObj = new PrescriptiveMainPage(driver);
-            // PrescriptiveMainPageObj.ClickToWeeklySalesPage();
+            // PrescriptiveMainPageObj.ClickMenu_ToWeeklySalesPage();
             // PrescriptiveMainPageObj.ClickToHomePage();
-            // PrescriptiveMainPageObj.ClickToTipsAndIdeasPage();
+            // PrescriptiveMainPageObj.ClickMenu_ToTipsAndIdeasPage();
             // PrescriptiveMainPageObj.ClickToHomePage();
-            // PrescriptiveMainPageObj.ClickToStoreLocatorPage();
+            // PrescriptiveMainPageObj.ClickMenu_ToStoreLocatorPage();
             // PrescriptiveMainPageObj.ClickToHomePage();
-            PrescriptiveMainPageObj.ClickToBrowseProductsPage();
+            PrescriptiveMainPageObj.ClickMenu_ToBrowseProductsPage();
 
             PrescriptiveBrowseProductsPage PrescriptiveBrowseProductsPageObj = new PrescriptiveBrowseProductsPage(driver);
             PrescriptiveBrowseProductsPageObj.ClickToHomePage();
-            // PrescriptiveMainPageObj.ClickToCovid19UpdatePage();
+            // PrescriptiveMainPageObj.ClickMenu_ToCovid19UpdatePage();
             // PrescriptiveMainPageObj.ClickToHomePage();
             Thread.Sleep(2000); 
         }

@@ -61,6 +61,12 @@ namespace WFMPractice
                 return SelsDict[aName].BySelector;
             }
 
+            public SelDescriptor GetSelDescriptor(string aName)
+            {
+                return SelsDict[aName];
+            }
+
+
             public List<By> GetBySelectorsList_EltsHavingAttrName(string aAttrName)
             {
                 List<By> BySelectorsList = new List<By>();
@@ -133,11 +139,19 @@ namespace WFMPractice
                 WaitForAllStaticEltsToBeVisible(aTimeoutInSecs);
             }
 
-            public IWebElement ClickEltByName(string aEltName)
+            public IWebElement ClickEltByName(string aEltName, int MaxWaitTimeInSecs=10)
             {
-                IWebElement elt = driver.FindElement(SelsMgr.GetBySelector(aEltName));
+                SelDescriptor CurrSelDescriptor = SelsMgr.GetSelDescriptor(aEltName);
+                IWebElement elt = driver.FindElement(CurrSelDescriptor.BySelector);
                 elt.Click();
-                return elt;
+                if (CurrSelDescriptor.HasAttr("ClickCausesPageLoad"))
+                {
+                    WaitForCurrPageToFinishLoading(driver, MaxWaitTimeInSecs);
+                    return null;
+                } else
+                {
+                    return elt;
+                }
             }
         }
 
