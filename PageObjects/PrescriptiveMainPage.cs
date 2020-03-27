@@ -28,7 +28,7 @@ namespace WFMPractice
                 By.CssSelector(".logo__link"),
                 new Dictionary<string,string>{
                     {WFMUtils.SelDescriptor.StdAttrNames.IsStatic, "y"},
-                    {"clickCausesPageLoad", "y"}
+                    {WFMUtils.SelDescriptor.StdAttrNames.ClickCausesPageLoad, "y"}
                 }
             );
             this.AddSelDescriptor(
@@ -36,7 +36,7 @@ namespace WFMPractice
                 By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='Weekly Sales']"),
                 new Dictionary<string,string>{
                     {WFMUtils.SelDescriptor.StdAttrNames.IsStatic, "y"},
-                    {"clickCausesPageLoad", "y"}
+                    {WFMUtils.SelDescriptor.StdAttrNames.ClickCausesPageLoad, "y"}
                 }
             );
             this.AddSelDescriptor(
@@ -44,7 +44,7 @@ namespace WFMPractice
                 By.XPath("//a[text()='See weekly sales']"),
                 new Dictionary<string,string>{
                     {WFMUtils.SelDescriptor.StdAttrNames.IsStatic, "y"},
-                    {"clickCausesPageLoad", "y"}
+                    {WFMUtils.SelDescriptor.StdAttrNames.ClickCausesPageLoad, "y"}
                 }
             );
             this.AddSelDescriptor(
@@ -52,7 +52,7 @@ namespace WFMPractice
                 By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='Tips & Ideas']"),
                 new Dictionary<string,string>{
                     {WFMUtils.SelDescriptor.StdAttrNames.IsStatic, "y"},
-                    {"clickCausesPageLoad", "y"}
+                    {WFMUtils.SelDescriptor.StdAttrNames.ClickCausesPageLoad, "y"}
                 }
             );
             this.AddSelDescriptor(
@@ -60,7 +60,7 @@ namespace WFMPractice
                 By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='Store Locator']"),
                 new Dictionary<string,string>{
                     {WFMUtils.SelDescriptor.StdAttrNames.IsStatic, "y"},
-                    {"clickCausesPageLoad", "y"}
+                    {WFMUtils.SelDescriptor.StdAttrNames.ClickCausesPageLoad, "y"}
                 }
             );
             this.AddSelDescriptor(
@@ -68,7 +68,7 @@ namespace WFMPractice
                 By.XPath("//a[text()='Find a store']"),
                 new Dictionary<string,string>{
                     {WFMUtils.SelDescriptor.StdAttrNames.IsStatic, "y"},
-                    {"clickCausesPageLoad", "y"}
+                    {WFMUtils.SelDescriptor.StdAttrNames.ClickCausesPageLoad, "y"}
                 }
             );
             this.AddSelDescriptor(
@@ -76,7 +76,7 @@ namespace WFMPractice
                 By.XPath("//a[text()='Find your store']"),
                 new Dictionary<string,string>{
                     {WFMUtils.SelDescriptor.StdAttrNames.IsStatic, "y"},
-                    {"clickCausesPageLoad", "y"}
+                    {WFMUtils.SelDescriptor.StdAttrNames.ClickCausesPageLoad, "y"}
                 }
             );
             this.AddSelDescriptor(
@@ -84,7 +84,7 @@ namespace WFMPractice
                 By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='Browse Products']"),
                 new Dictionary<string,string>{
                     {WFMUtils.SelDescriptor.StdAttrNames.IsStatic, "y"},
-                    {"clickCausesPageLoad", "y"}
+                    {WFMUtils.SelDescriptor.StdAttrNames.ClickCausesPageLoad, "y"}
                 }
             );
             this.AddSelDescriptor(
@@ -92,7 +92,7 @@ namespace WFMPractice
                 By.XPath("//a[text()='Browse products']"),
                 new Dictionary<string,string>{
                     {WFMUtils.SelDescriptor.StdAttrNames.IsStatic, "y"},
-                    {"clickCausesPageLoad", "y"}
+                    {WFMUtils.SelDescriptor.StdAttrNames.ClickCausesPageLoad, "y"}
                 }
             );
             this.AddSelDescriptor(
@@ -100,7 +100,7 @@ namespace WFMPractice
                 By.XPath("//a[text()='Get delivery & pickup']"),
                 new Dictionary<string,string>{
                     {WFMUtils.SelDescriptor.StdAttrNames.IsStatic, "y"},
-                    {"clickCausesPageLoad", "y"}
+                    {WFMUtils.SelDescriptor.StdAttrNames.ClickCausesPageLoad, "y"}
                 }
             );
             this.AddSelDescriptor(
@@ -108,7 +108,7 @@ namespace WFMPractice
                 By.XPath("//*[@class='menu__nav menu--main__nav']//*[text()='COVID-19 Update']"),
                 new Dictionary<string,string>{
                     {WFMUtils.SelDescriptor.StdAttrNames.IsStatic, "y"},
-                    {"clickCausesPageLoad", "y"}
+                    {WFMUtils.SelDescriptor.StdAttrNames.ClickCausesPageLoad, "y"}
                 }
             );
         }
