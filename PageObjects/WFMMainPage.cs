@@ -43,7 +43,7 @@ namespace WFMPractice
             }
         }
         
-        public void DoMenuHoverThenClickMenuLink(By MenuSelector, string LinkText, int HoverSleepTimeInMilliSecs=4000)
+        public void ClickMenuLink(By MenuSelector, string LinkText, int HoverSleepTimeInMilliSecs=4000)
         {
             IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             IWebElement element = wait.Until(ExpectedConditions.ElementIsVisible(MenuSelector));

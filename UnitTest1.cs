@@ -109,10 +109,8 @@ namespace WFMPractice
             WFMUtils.LoadWebPage(this.driver, "https://www.wholefoodsmarket.com/");
 
             WFMMainPage WFMMainPageObj = new WFMMainPage(driver);
-            WFMMainPageObj.DoMenuHoverThenClickMenuLink(WFMMainPageObj.NavMenuSelectors["WeeklySales"], "Weekly Sales");
+            WFMMainPageObj.ClickMenuLink(WFMMainPageObj.NavMenuSelectors["WeeklySales"], "Weekly Sales");
             WFMMainPageObj.Equals ("https://www.wholefoodsmarket.com/sales-flyer");
-            // WeeklySalesPage WeeklySalesPageObj = new WeeklySalesPage(driver);
-            // WeeklySalesPageObj.Equals ("https://www.wholefoodsmarket.com/sales-flyer");
             Thread.Sleep(2000); 
         }
 
@@ -122,10 +120,8 @@ namespace WFMPractice
             WFMUtils.LoadWebPage(this.driver, "https://www.wholefoodsmarket.com/");
 
             WFMMainPage WFMMainPageObj = new WFMMainPage(driver);
-            WFMMainPageObj.DoMenuHoverThenClickMenuLink(WFMMainPageObj.NavMenuSelectors["Tips&Ideas"], "Tips & Ideas");
+            WFMMainPageObj.ClickMenuLink(WFMMainPageObj.NavMenuSelectors["Tips&Ideas"], "Tips & Ideas");
             WFMMainPageObj.Equals ("https://inspiration.wholefoodsmarket.com/");
-            // TipsPage TipsPageObj = new TipsPage(driver);
-            // TipsPageObj.Equals ("https://inspiration.wholefoodsmarket.com/");
             Thread.Sleep(2000); 
         }
 
@@ -135,7 +131,7 @@ namespace WFMPractice
             WFMUtils.LoadWebPage(this.driver, "https://www.wholefoodsmarket.com/");
 
             WFMMainPage WFMMainPageObj = new WFMMainPage(driver);
-            WFMMainPageObj.DoMenuHoverThenClickMenuLink(WFMMainPageObj.NavMenuSelectors["StoreLocator"], "Store Locator");
+            WFMMainPageObj.ClickMenuLink(WFMMainPageObj.NavMenuSelectors["StoreLocator"], "Store Locator");
             WFMMainPageObj.Equals ("https://www.wholefoodsmarket.com/stores");
             Thread.Sleep(2000); 
         }
@@ -146,7 +142,7 @@ namespace WFMPractice
             WFMUtils.LoadWebPage(this.driver, "https://www.wholefoodsmarket.com/");
 
             WFMMainPage WFMMainPageObj = new WFMMainPage(driver);
-            WFMMainPageObj.DoMenuHoverThenClickMenuLink(WFMMainPageObj.NavMenuSelectors["BrowseProducts"], "Browse Products");
+            WFMMainPageObj.ClickMenuLink(WFMMainPageObj.NavMenuSelectors["BrowseProducts"], "Browse Products");
             WFMMainPageObj.Equals ("https://products.wholefoodsmarket.com/");
             Thread.Sleep(2000); 
         }
@@ -157,7 +153,7 @@ namespace WFMPractice
             WFMUtils.LoadWebPage(this.driver, "https://www.wholefoodsmarket.com/");
 
             WFMMainPage WFMMainPageObj = new WFMMainPage(driver);
-            WFMMainPageObj.DoMenuHoverThenClickMenuLink(WFMMainPageObj.NavMenuSelectors["Covid19Update"], "COVID-19 Update");
+            WFMMainPageObj.ClickMenuLink(WFMMainPageObj.NavMenuSelectors["Covid19Update"], "COVID-19 Update");
             WFMMainPageObj.Equals ("https://www.wholefoodsmarket.com/company-info/covid-19-response");
             Thread.Sleep(2000); 
         }
@@ -169,12 +165,17 @@ namespace WFMPractice
 
             BrowseProductsPage BrowseProductsPageObj = new BrowseProductsPage(driver);
             BrowseProductsPageObj.SetFindStoreSearchBoxText("FindStore", "78758");
-            BrowseProductsPageObj.ClickStoreFromSearch("FindStoreSearchResult", "Domain — 11920 Domain Dr, Austin, TX 78758");
+            BrowseProductsPageObj.ClickElementAfterSearch("FindStoreSearchResult", "Domain — 11920 Domain Dr, Austin, TX 78758");
             Thread.Sleep(2000); 
-            Assert.AreEqual (BrowseProductsPageObj.PageElements["SavedStoreLocation"], "Domain");
-            // BrowseProductsPageObj.SetProductSearchBoxText("ProductSearchBox", "Apple");
+            Assert.AreEqual(this.driver.FindElement(BrowseProductsPageObj.PageElements["SavedStoreLocation"]).GetAttribute("innerText"), "Domain");
             Thread.Sleep(2000); 
-        }        
+            BrowseProductsPageObj.SetProductSearchBoxText("ProductSearchBox", "Apple");
+            Thread.Sleep(2000); 
+            Assert.That(this.driver.FindElement(BrowseProductsPageObj.PageElements["ProductCardName"]).GetAttribute("innerText"), Contains.Substring("Apple"));
+            BrowseProductsPageObj.DoMenuHoverThenClickProductCard(BrowseProductsPageObj.PageElements["ProductCard"]);
+            Thread.Sleep(3000);
+            Assert.That(this.driver.FindElement(BrowseProductsPageObj.PageElements["ProductHeader"]).GetAttribute("innerText"), Contains.Substring("Apple"));
+        }
 
         [TearDown]
         public void Close()
